@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Personal Finance
 
-## Getting Started
+A web app to track spending, view income and expenses by category, and get simple insights to keep your finances on track.
 
-First, run the development server:
+**This project is open source.** You are welcome to use, modify, and contribute.
+
+## Tech stack
+
+- **[Next.js](https://nextjs.org)** – React framework (App Router)
+- **[Chart.js](https://www.chartjs.org/)** (via `react-chartjs-2`) – Charts for spending by category
+- **TypeScript** – Typed JavaScript
+- **Tailwind CSS** – Styling
+
+## Project overview
+
+### Pages
+
+| Route        | Description |
+|-------------|-------------|
+| **`/`**     | **Home** – Landing page with a short pitch, feature highlights (Transactions, Spending by category, Insights), and a call-to-action to open the dashboard. |
+| **`/dashboard`** | **Dashboard** – Main app where you manage and view your finances. |
+
+### Dashboard sections
+
+On **`/dashboard`** you’ll find:
+
+- **Balance hero** – Total balance, total income, total expenses, and an “Add expense” button.
+- **Metric cards** – Income this month, monthly spending (with % vs last month and progress), and total expenses (all time).
+- **Spending chart** – Breakdown of spending by category (powered by Chart.js).
+- **Recent transactions** – List of latest income and expenses.
+- **AI Advisor** – Simple advice based on your spending.
+- **Insights** – Tips to improve habits and compare to last month.
+- **Settings** – Dashboard preferences (e.g. theme).
+- **Add expense modal** – Form to log a new expense (amount, category, date, description).
+
+### Home page sections
+
+On **`/`**:
+
+- Header with branding.
+- Hero with title, short description, and “Open dashboard” button.
+- Feature cards: Transactions, Spending by category, Insights.
+- Secondary link to the dashboard.
+
+## Getting started
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Other commands:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run build` – Production build
+- `npm run start` – Start production server
+- `npm run lint` – Run ESLint
 
-## Learn More
+## Learn more
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Chart.js Documentation](https://www.chartjs.org/docs/latest/)
