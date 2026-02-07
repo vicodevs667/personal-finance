@@ -1,4 +1,4 @@
-import type { Transaction, FinancialSummary, AIAdvice } from "../types";
+import type { Transaction, FinancialSummary, AIAdvice } from "@/types";
 
 export const TRANSACTION_CATEGORIES = [
   "Food",
