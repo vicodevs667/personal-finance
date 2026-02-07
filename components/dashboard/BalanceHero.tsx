@@ -4,12 +4,15 @@ type BalanceHeroProps = {
   totalBalance: number;
   totalIncome: number;
   totalExpenses: number;
+  /** Optional action (e.g. "Add expense" button) shown below the balance summary. */
+  action?: React.ReactNode;
 };
 
 export const BalanceHero = ({
   totalBalance,
   totalIncome,
   totalExpenses,
+  action,
 }: BalanceHeroProps) => {
   const isOverBudget = totalBalance < 0;
 
@@ -41,6 +44,11 @@ export const BalanceHero = ({
         Income ${totalIncome.toLocaleString("en-US", { minimumFractionDigits: 2 })} −
         expenses ${totalExpenses.toFixed(2)}
       </p>
+      {action !== undefined && (
+        <div className="mt-6">
+          {action}
+        </div>
+      )}
     </section>
   );
 };

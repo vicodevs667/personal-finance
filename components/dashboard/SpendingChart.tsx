@@ -83,7 +83,7 @@ export const SpendingChart = ({ chartData }: SpendingChartProps) => {
   );
 
   return (
-    <GlassCard className="lg:col-span-2 p-6 sm:p-8">
+    <GlassCard className="p-6 sm:p-8">
       <h2
         className="text-lg font-semibold text-white"
         style={{ fontFamily: "var(--font-syne)" }}

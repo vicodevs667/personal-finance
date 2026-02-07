@@ -1,7 +1,9 @@
 "use client";
 
+import { useState, useCallback } from "react";
 import { useDashboardData } from "@/hooks/useDashboardData";
 import { GlassCard } from "@/components/ui/GlassCard";
+import { GlassModal } from "@/components/ui/GlassModal";
 import {
   AmbientBackground,
   DashboardHeader,
@@ -14,6 +16,7 @@ import {
 } from "@/components/dashboard";
 
 export default function PersonalFinanceDashboard() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const {
     totalBalance,
     totalIncome,
@@ -33,6 +36,17 @@ export default function PersonalFinanceDashboard() {
     setDescription,
   } = useDashboardData();
 
+  const handleAddExpenseAndClose = useCallback(
+    (data: Parameters<typeof handleAddExpense>[0]) => {
+      handleAddExpense(data);
+      setIsModalOpen(false);
+    },
+    [handleAddExpense]
+  );
+
+  const handleOpenModal = useCallback(() => setIsModalOpen(true), []);
+  const handleCloseModal = useCallback(() => setIsModalOpen(false), []);
+
   const currentMonthLabel = new Date().toLocaleDateString("en-US", {
     month: "long",
     year: "numeric",
@@ -49,6 +63,17 @@ export default function PersonalFinanceDashboard() {
         : "text-amber-400"
       : undefined;
 
+  const addExpenseButton = (
+    <button
+      type="button"
+      onClick={handleOpenModal}
+      className="inline-flex h-11 items-center justify-center rounded-xl bg-gradient-to-r from-violet-500 via-fuchsia-500/90 to-cyan-500 px-5 font-semibold text-white shadow-lg shadow-violet-500/20 transition-all hover:shadow-violet-500/30 hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 focus:ring-offset-[#030712]"
+      aria-label="Add expense"
+    >
+      Add expense
+    </button>
+  );
+
   return (
     <div className="min-h-screen relative overflow-hidden">
       <AmbientBackground />
@@ -62,6 +87,7 @@ export default function PersonalFinanceDashboard() {
               totalBalance={totalBalance}
               totalIncome={totalIncome}
               totalExpenses={totalExpenses}
+              action={addExpenseButton}
             />
           </GlassCard>
         </section>
@@ -86,26 +112,37 @@ export default function PersonalFinanceDashboard() {
           />
         </div>
 
-        <div className="mb-8 grid gap-6 lg:grid-cols-3">
+        <section className="mb-8">
           <SpendingChart chartData={chartData} />
-          <AddExpenseForm
-            amount={formState.amount}
-            category={formState.category}
-            date={formState.date}
-            description={formState.description}
-            onAmountChange={setAmount}
-            onCategoryChange={setCategory}
-            onDateChange={setDate}
-            onDescriptionChange={setDescription}
-            onSubmit={handleAddExpense}
-          />
-        </div>
+        </section>
 
-        <div className="grid gap-6 lg:grid-cols-3">
+        <section className="mb-8">
           <RecentTransactions transactions={recentTransactions} />
+        </section>
+
+        <section>
           <InsightCard advice={primaryAdvice} />
-        </div>
+        </section>
       </div>
+
+      <GlassModal
+        open={isModalOpen}
+        onClose={handleCloseModal}
+        title="Add expense"
+      >
+        <AddExpenseForm
+          amount={formState.amount}
+          category={formState.category}
+          date={formState.date}
+          description={formState.description}
+          onAmountChange={setAmount}
+          onCategoryChange={setCategory}
+          onDateChange={setDate}
+          onDescriptionChange={setDescription}
+          onSubmit={handleAddExpenseAndClose}
+          wrapInCard={false}
+        />
+      </GlassModal>
     </div>
   );
 }

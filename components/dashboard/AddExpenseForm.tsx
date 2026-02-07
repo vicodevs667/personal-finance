@@ -14,6 +14,8 @@ type AddExpenseFormProps = {
   onDateChange: (value: string) => void;
   onDescriptionChange: (value: string) => void;
   onSubmit: (transaction: Omit<Transaction, "id">) => void;
+  /** When false, renders only form content (no GlassCard). Use inside modals. */
+  wrapInCard?: boolean;
 };
 
 export const AddExpenseForm = ({
@@ -26,6 +28,7 @@ export const AddExpenseForm = ({
   onDateChange,
   onDescriptionChange,
   onSubmit,
+  wrapInCard = true,
 }: AddExpenseFormProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,8 +42,8 @@ export const AddExpenseForm = ({
     });
   };
 
-  return (
-    <GlassCard className="p-6 sm:p-8">
+  const formContent = (
+    <>
       <h2
         className="text-lg font-semibold text-white"
         style={{ fontFamily: "var(--font-syne)" }}
@@ -136,6 +139,10 @@ export const AddExpenseForm = ({
           Add expense
         </button>
       </form>
-    </GlassCard>
+    </>
   );
+
+  if (!wrapInCard) return formContent;
+
+  return <GlassCard className="p-6 sm:p-8">{formContent}</GlassCard>;
 };
