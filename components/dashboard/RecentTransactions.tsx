@@ -7,12 +7,12 @@ type RecentTransactionsProps = {
   transactions: Transaction[];
 };
 
-const formatDate = (dateStr: string) =>
-  new Date(dateStr).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
+/** Format YYYY-MM-DD for display. Uses date parts only to avoid server/client timezone hydration mismatch. */
+const formatDate = (dateStr: string) => {
+  const [y, m, d] = dateStr.split("-").map(Number);
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  return `${months[(m ?? 1) - 1]} ${d ?? 0}, ${y ?? 0}`;
+};
 
 export const RecentTransactions = ({ transactions }: RecentTransactionsProps) => {
   return (

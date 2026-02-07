@@ -1,18 +1,35 @@
 @import "tailwindcss";
 
-:root {
+:root,
+.dark {
   --background: #030712;
   --foreground: #f8fafc;
   /* Dark glassmorphism */
   --glass-bg: rgba(255, 255, 255, 0.04);
   --glass-border: rgba(255, 255, 255, 0.08);
   --glass-highlight: rgba(255, 255, 255, 0.06);
+  /* Settings button - visible in dark mode */
+  --settings-btn-bg: rgba(255, 255, 255, 0.12);
+  --settings-btn-border: rgba(255, 255, 255, 0.22);
+  --settings-btn-icon: rgba(226, 232, 240, 0.95);
   --glow-violet: rgba(139, 92, 246, 0.4);
   --glow-cyan: rgba(34, 211, 238, 0.35);
   --glow-fuchsia: rgba(217, 70, 239, 0.3);
   --accent-violet: #a78bfa;
   --accent-cyan: #22d3ee;
   --accent-emerald: #34d399;
+}
+
+.light {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --glass-bg: rgba(0, 0, 0, 0.04);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-highlight: rgba(0, 0, 0, 0.06);
+  /* Settings button - blue style in light mode */
+  --settings-btn-bg: #3b82f6;
+  --settings-btn-border: #2563eb;
+  --settings-btn-icon: #ffffff;
 }
 
 @theme inline {
@@ -29,4 +46,13 @@ body {
   font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Settings FAB: visible in dark/light and clear hover */
+[data-settings-fab]:hover {
+  filter: brightness(1.15);
+}
+[data-settings-fab]:focus-visible {
+  outline: 2px solid rgba(139, 92, 246, 0.6);
+  outline-offset: 2px;
 }

@@ -116,11 +116,14 @@ export const useDashboardData = (): UseDashboardDataReturn => {
     setDescription("");
   }, []);
 
-  const recentTransactions = useMemo(
-    () =>
-      [...transactions].sort((a, b) => (b.date > a.date ? 1 : -1)).slice(0, 8),
-    [transactions]
-  );
+  const recentTransactions = useMemo(() => {
+    return [...transactions]
+      .sort((a, b) => {
+        if (b.date !== a.date) return b.date > a.date ? 1 : -1;
+        return a.id.localeCompare(b.id);
+      })
+      .slice(0, 8);
+  }, [transactions]);
   const primaryAdvice = mockAIAdvice[0] ?? null;
 
   return {

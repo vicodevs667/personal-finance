@@ -7,3 +7,5 @@ export type { ChartDataItem } from "./SpendingChart";
 export { AddExpenseForm } from "./AddExpenseForm";
 export { RecentTransactions } from "./RecentTransactions";
 export { InsightCard } from "./InsightCard";
+export { AIAdvisorCard } from "./AIAdvisorCard";
+export { DashboardSettings } from "./DashboardSettings";

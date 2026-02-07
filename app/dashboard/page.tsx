@@ -13,6 +13,8 @@ import {
   AddExpenseForm,
   RecentTransactions,
   InsightCard,
+  AIAdvisorCard,
+  DashboardSettings,
 } from "@/components/dashboard";
 
 export default function PersonalFinanceDashboard() {
@@ -26,6 +28,7 @@ export default function PersonalFinanceDashboard() {
     spendingPercent,
     chartData,
     recentTransactions,
+    expenses,
     primaryAdvice,
     summary,
     handleAddExpense,
@@ -120,10 +123,16 @@ export default function PersonalFinanceDashboard() {
           <RecentTransactions transactions={recentTransactions} />
         </section>
 
+        <section className="mb-8">
+          <AIAdvisorCard expenses={expenses} />
+        </section>
+
         <section>
           <InsightCard advice={primaryAdvice} />
         </section>
       </div>
+
+      <DashboardSettings />
 
       <GlassModal
         open={isModalOpen}
